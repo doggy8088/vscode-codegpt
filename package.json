@@ -1,0 +1,71 @@
+{
+  "name": "codegpt",
+  "displayName": "CodeGPT: AI-Assisted Git Commit Message Generator",
+  "description": "Generate Git commit message by using CodeGPT",
+  "version": "0.1.0",
+  "preview": true,
+  "publisher": "doggy8088",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doggy8088/vscode-codegpt"
+  },
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "license": "MIT",
+  "galleryBanner": {
+    "color": "#AEBBC0",
+    "theme": "light"
+  },
+  "keywords": [
+    "codegpt"
+  ],
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/main",
+  "enabledApiProposals": [
+      "contribSourceControlInputBoxMenu"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "codegpt.generateCommitMessage",
+        "title": "Generate Commit Message with CodeGPT",
+        "icon": "$(sparkle)",
+        "category": "CodeGPT"
+      }
+    ],
+    "menus": {
+      "scm/inputBox": [
+          {
+              "command": "codegpt.generateCommitMessage",
+              "when": "scmProvider == git"
+          }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:publish": "vsce publish",
+    "vscode:prepublish": "rimraf --glob out/* && npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/node": "^12.12.21",
+    "@types/vscode": "^1.84.2",
+    "esbuild": "^0.19.5",
+    "glob": "^7.1.5",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+  }
+}
